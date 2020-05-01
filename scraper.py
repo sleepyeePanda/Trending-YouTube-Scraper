@@ -108,6 +108,9 @@ def get_pages(country_code, next_page_token="&"):
     while next_page_token is not None:
         # A page of data i.e. a list of videos and all needed data
         video_data_page = api_request(next_page_token, country_code)
+        
+        if video_data_page.get('error'):
+            print(video_data_page['error'])
 
         # Get the next page token and build a string which can be injected into the request with it, unless it's None,
         # then let the whole thing be None so that the loop ends after this cycle
